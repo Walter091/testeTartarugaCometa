@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Cadastro Lançamento</title>
+		
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+	<div class="container my-2">
+		<h1>Tartaruga Cometa</h1>
+		<hr>
+		<form action="#" th:action="@{/salvarLancamento}" th:object="${lancamento}" method="POST">
+			
+			<select th:field="*{produto}">
+				<option th:each="produtols : ${listProdutos}"
+					th:value="${produtols.id}" th:text="${produtols.nome}" required="true" selected="selected"></option>
+			</select>
+
+			<select th:field="*{remetente}">
+				<option th:each="remetentels : ${listRemetentes}"
+					th:value="${remetentels.id}" th:text="${remetentels.nome}" required="true" selected="selected"></option>
+			</select>
+			
+			<select th:field="*{destinatario}">
+				<option th:each="destinatariols : ${listDestinatarios}"
+					th:value="${destinatariols.id}" th:text="${destinatariols.nome}" required="true" selected="selected"></option>
+			</select>
+
+			<select th:field="*{statusLancamento}">
+				<option value="">Status do Lancamento</option>
+				<option th:each="status : ${T(com.example.tartarugaCometaGw.nucleo.StatusLancamentoEnum).values()}"
+					th:value="${status.id}" th:text="${status.descricao}" selected="selected"></option>
+			</select>
+
+			<br><br>
+			<button type="submit" disabled="true" class="btn btn-info col-2">Salvar</button>
+
+		</form>
+		<hr>
+
+		<a th:href="@{/index}">Retornar para pagina inicial</a>
+	</div>
+</body>
+
+</html>
