@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.example.tartarugaCometaGw.nucleo.utils.StringUtils;
+
 @Entity
 @Table(name = "produto")
 public class Produto implements Serializable{
@@ -70,8 +72,12 @@ public class Produto implements Serializable{
 		return valor;
 	}
 
+	public String getValorFormatado() {
+		return StringUtils.formatedDinheiro(valor);
+	}
+
 	public void setValor(Float valor) {
 		this.valor = valor;
 	}
-	
+
 }

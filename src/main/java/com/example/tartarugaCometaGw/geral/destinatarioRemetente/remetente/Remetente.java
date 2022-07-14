@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.example.tartarugaCometaGw.geral.destinatarioRemetente.Endereco;
 import com.example.tartarugaCometaGw.nucleo.utils.Validation;
 
 @Entity
@@ -32,8 +31,8 @@ public class Remetente implements Serializable{
 	@Column(name = "NOME")
 	private String nome;
 	
-	@Column(name = "ID_ENDERECO")
-	private Endereco endereco;
+	@Column(name = "ENDERECO")
+	private String endereco;
 	
 	// ----------------------------------------------------
 	
@@ -73,11 +72,11 @@ public class Remetente implements Serializable{
 		this.nome = nome;
 	}
 	
-	public Endereco getEndereco() {
+	public String getEndereco() {
 		return endereco;
 	}
 	
-	public void setEndereco(Endereco endereco) {
+	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
 

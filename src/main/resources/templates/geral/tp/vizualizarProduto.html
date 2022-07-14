@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Produto</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+	<div class="container my-2">
+		
+		<a th:href="@{/incluirProduto}" class="btn btn-primary btn-sm mb-3">Cadastro Produto</a>
+		
+		<h1>Lista de Produtos</h1>
+		<hr />
+		<table border="1" class="table table-striped table-responsive-md">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>NOME</th>
+					<th>PESO</th>
+					<th>VOLUME</th>
+					<th>VALOR</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="produto : ${listProduto}">
+					<td th:text="${produto.id}"></td>
+					<td th:text="${produto.nome}"></td>
+					<td th:text="${produto.peso}"></td>
+					<td th:text="${produto.volume}"></td>
+					<td th:text="${produto.valorFormatado}"></td>
+					<td>
+						<a th:href="@{/indexProduto/alterar/{id}(id=${remetente.id})}" class="btn btn-primary">Alterar</a>
+						<a th:href="@{/indexProduto/excluir/{id}(id=${remetente.id})}" class="btn btn-danger">Excluir</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<a th:href="@{/entrar}">Retornar para o Menu de Navegação</a>
+	</div>
+		
+</body>
+
+</html>

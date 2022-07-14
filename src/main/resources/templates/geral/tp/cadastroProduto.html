@@ -11,21 +11,29 @@
 
 <body>
 	<div class="container my-2">
-		<h1>Tartaruga Cometa</h1>
+		<h1>Tartaruga Cometa | Produto </h1>
 		<hr>
 		<form action="#" th:action="@{/salvarProduto}" th:object="${produto}" method="POST">
-			<input type="number" disabled="true" th:field="*{id}" class="form-control mb-4 col-4">
-			<input type="text" th:field="*{nome}" required="true" placeholder="Nome" class="form-control mb-4 col-4">
-			<input type="number" th:field="*{peso}" required="true" placeholder="Peso" class="form-control mb-4 col-4">
-			<input type="text" th:field="*{volume}" required="true" placeholder="Volume" class="form-control mb-4 col-4">
-			<input type="number" th:field="*{valor}" required="true" placeholder="Valor" class="form-control mb-4 col-4">
+			<label th:each="id : ${idAuto}"  th:value="${id}" th:text="${id}"></label>
+			<input type="number" th:field="*{id}" class="form-control mb-4 col-4">
+			
+			<label for="nome" >Nome do Produto:</label>
+			<input id="nome" type="text" th:field="*{nome}" required="true" placeholder="Nome" class="form-control mb-4 col-4">
+			
+			<label for="peso" >Peso:</label>
+			<input id="peso" type="number" th:field="*{peso}" required="true" placeholder="Peso" class="form-control mb-4 col-4">
+			
+			<label for="volu" >Volume:</label>
+			<input id="volu" type="text" th:field="*{volume}" required="true" placeholder="Volume" class="form-control mb-4 col-4">
+			
+			<label for="valor" >Valor:</label>
+			<input id="valor" type="number" th:field="*{valor}" required="true" placeholder="Valor" class="form-control mb-4 col-4">
 
 			<br><br>
 			<button type="submit" class="btn btn-info col-2">Salvar</button>
 
 		</form>
-
-		<a th:href="@{/entrar}">Retornar para o Menu de Naveção</a>
+		<a th:href="@{/vizualizarProduto}">Retornar para a lista de Produtos</a>
 	</div>
 </body>
 
