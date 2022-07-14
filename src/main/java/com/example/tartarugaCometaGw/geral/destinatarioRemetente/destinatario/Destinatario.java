@@ -1,5 +1,7 @@
 package com.example.tartarugaCometaGw.geral.destinatarioRemetente.destinatario;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,12 +14,14 @@ import com.example.tartarugaCometaGw.geral.lancamentos.Lancamento;
 
 @Entity
 @Table(name = "destinatario")
-public class Destinatario {
+public class Destinatario implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID_DESTINATARIO")
-	private Integer id;
+	private Long id;
 	
 	@Column(name = "ID_LANCAMENTO")
 	private Lancamento lancamento;
@@ -36,11 +40,11 @@ public class Destinatario {
 	
 	// ----------------------------------------------------
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
@@ -75,13 +79,12 @@ public class Destinatario {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public Endereco getEndereco() {
 		return endereco;
 	}
-	
+
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-
 }

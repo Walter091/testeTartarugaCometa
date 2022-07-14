@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Cadastro Destinatario</title>
+		
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+	<div class="container my-2">
+		<h1>Tartaruga Cometa</h1>
+		<hr>
+		<form action="#" th:action="@{/salvarDestinatario}" th:object="${destinatario}" method="POST">
+			<input type="hidden" th:field="*{id}">			
+			<label for="cnpj" >CNPJ/CNPF:</label>
+			<input type="text" id="cnpj" th:field="*{cnpjCnpf}" required="true" placeholder="CNPJ ou CNPF" class="form-control mb-4 col-4">
+
+			<label for="razaoSocial" >Razão Social:</label>
+			<input type="text" id="razaoSocial" th:field="*{razaoSocial}" placeholder="Razão Social" class="form-control mb-4 col-4">			
+
+			<label for="nome" >Nome Destinatário:</label>
+			<input type="text" id="nome" th:field="*{nome}" required="true" placeholder="Nome" class="form-control mb-4 col-4">
+			
+			<label for="endereco" >Descreva seu Endereço:</label>
+			<input type="text" id="endereco" th:field="*{endereco}" required="true" placeholder="Nome" class="form-control mb-4 col-4">
+			<br><br>
+			<button type="submit" disabled="true" class="btn btn-info col-2">Salvar</button>
+
+		</form>
+		<hr>
+
+		<a th:href="@{/index}">Retornar para pagina inicial</a>
+	</div>
+</body>
+
+</html>

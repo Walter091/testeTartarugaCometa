@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Cadastro Transportadora</title>
+	<title>Cadastro Produto</title>
 		
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -11,25 +11,19 @@
 
 <body>
 	<div class="container my-2">
-		<h1>Coffe Break WL - Colaboradores</h1>
+		<h1>Tartaruga Cometa</h1>
 		<hr>
-		<form action="#" th:action="@{/salvarOpcao}" th:object="${opcaoColaborador}" method="POST">
-			<input type="hidden" id="id" th:field="*{idOpcao}">
+		<form action="#" th:action="@{/salvarProduto}" th:object="${produto}" method="POST">
+			<input type="hidden" th:field="*{id}">
 			<input type="text" th:field="*{nome}" required="true" placeholder="Nome" class="form-control mb-4 col-4">
-			
-			<select th:field="*{tipoOpcao}">
-				<option th:each="opcoesCb : ${T(com.example.coffeBreakWL.nucleo.enums.TipoOpcaoEnum).values()}"
-					th:value="${opcoesCb.id}" th:text="${opcoesCb.descricao}" selected="selected"></option>
-			</select>
+			<input type="number" th:field="*{peso}" required="true" placeholder="Peso" class="form-control mb-4 col-4">
+			<input type="text" th:field="*{volume}" required="true" placeholder="Volume" class="form-control mb-4 col-4">
+			<input type="currency" th:field="*{valor}" required="true" placeholder="Valor" class="form-control mb-4 col-4">
 
 			<br><br>
 			<button type="submit" disabled="true" class="btn btn-info col-2">Salvar</button>
 
 		</form>
-		<hr>
-		<div id="divMsgError" th:each="m : ${msgError}">
-			<span th:text="${m}"></span>
-		</div>
 
 		<a th:href="@{/index}">Retornar para a lista de pessoas</a>
 	</div>

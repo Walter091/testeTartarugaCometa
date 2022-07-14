@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.tartarugaCometaGw.geral.destinatarioRemetente.destinatario.Destinatario;
 import com.example.tartarugaCometaGw.geral.destinatarioRemetente.remetente.Remetente;
-import com.example.tartarugaCometaGw.geral.transportadora.Produto;
+import com.example.tartarugaCometaGw.geral.produto.Produto;
 
 @Service
 public class ServicoLancamento {
@@ -17,14 +17,14 @@ public class ServicoLancamento {
 	private RepositorioLancamento repositorio;
 	
 	public void salvar(Lancamento obj) {
-		repositorio.salvar(obj.getProduto().getId(), obj.getRemetente().getId(), obj.getDestinatario().getId());
+		repositorio.salvar(obj.getId(), obj.getProduto().getId(), obj.getRemetente().getId(), obj.getDestinatario().getId());
 	}
 	
 	public void alterar(Lancamento obj) {
 		repositorio.alterar(obj.getId(), obj.getProduto().getId(), obj.getRemetente().getId(), obj.getDestinatario().getId());
 	}
 	
-	public void excluir(Integer id) {
+	public void excluir(long id) {
 		repositorio.excluir(id);
 	}
 	// -----------------------------------------------------------

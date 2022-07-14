@@ -14,22 +14,6 @@ public class IndexController {
 	@GetMapping("/entrar")
 	public String index() {
 		return "index";
-	}
-
-	@GetMapping("/incluirDestinatario")
-	public String incluirDestinatario() {
-		return "/dr/cadastroDestinatario";
-	}
-
-	@GetMapping("/incluirRemetente")
-	public String incluirRemetente() {
-		return "/dr/cadastroRemetente";
-	}
-
-	@GetMapping("/incluirProduto")
-	public String incluirProduto() {
-		return "/tp/cadastroProduto";
-	}
-		
+	}		
 	
 }

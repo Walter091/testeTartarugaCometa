@@ -14,7 +14,7 @@
 		<h1>Tartaruga Cometa</h1>
 		<hr>
 		<form action="#" th:action="@{/salvarLancamento}" th:object="${lancamento}" method="POST">
-			
+			<input type="hidden" th:field="*{id}">			
 			<select th:field="*{produto}">
 				<option th:each="produtols : ${listProdutos}"
 					th:value="${produtols.id}" th:text="${produtols.nome}" required="true" selected="selected"></option>

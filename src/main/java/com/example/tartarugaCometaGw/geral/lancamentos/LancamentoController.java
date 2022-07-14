@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.tartarugaCometaGw.geral.destinatarioRemetente.destinatario.Destinatario;
 import com.example.tartarugaCometaGw.geral.destinatarioRemetente.remetente.Remetente;
-import com.example.tartarugaCometaGw.geral.transportadora.Produto;
+import com.example.tartarugaCometaGw.geral.produto.Produto;
 import com.example.tartarugaCometaGw.nucleo.StatusFormularioEnum;
 
 @Controller
@@ -28,7 +28,7 @@ public class LancamentoController {
 	public String vizualizarLancamento(Model model) {
 		status = StatusFormularioEnum.VIZUALIZAR;
 		model.addAttribute("listLancamentos", servico.getLancamentos());
-		return "/lc/vizualizarLancamentos";
+		return "/geral/lc/vizualizarLancamentos";
 	}
 	
 	@GetMapping("/incluirLancamento")
@@ -43,7 +43,7 @@ public class LancamentoController {
 		List<Destinatario> lsDestinatario = servico.getListDestinatarios();
 		model.addAttribute("listDestinatarios", lsDestinatario);
 		
-		return "/lc/cadastroLancamento";
+		return "/geral/lc/cadastroLancamento";
 	}
 	
 	

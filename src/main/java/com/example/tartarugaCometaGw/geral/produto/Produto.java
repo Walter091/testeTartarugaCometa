@@ -1,4 +1,6 @@
-package com.example.tartarugaCometaGw.geral.transportadora;
+package com.example.tartarugaCometaGw.geral.produto;
+
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,11 +11,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "produto")
-public class Produto {
+public class Produto implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "ID_DESTINATARIO")
-	private Integer id;
+	@Column(name = "ID_PRODUTO")
+	private Long id;
 	
 	@Column(name = "NOME")
 	private String nome;
@@ -29,11 +34,11 @@ public class Produto {
 	
 	// ---------------------------------------------------------------------
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
