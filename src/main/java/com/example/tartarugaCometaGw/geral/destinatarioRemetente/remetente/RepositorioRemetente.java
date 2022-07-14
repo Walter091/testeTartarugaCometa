@@ -14,6 +14,6 @@ public interface RepositorioRemetente extends CrudRepository<Remetente, Long>{
 	@Modifying
 	@Transactional
 	@Query(value = "INSERT INTO remetente (ID_REMETENTE, CNPJ_CNPF, RAZAO_SOCIAL, NOME) VALUES (:id, :cnpj, :razaoSocial, :nome)", nativeQuery = true)
-	public void salvarRemetente(@Param("id") long id, @Param("cnpj") String cnpj, @Param("razaoSocial") String razaoSocial, @Param("nome") String nome);
+	public void salvarRemetente(@Param("id") Long id, @Param("cnpj") String cnpj, @Param("razaoSocial") String razaoSocial, @Param("nome") String nome);
 
 }

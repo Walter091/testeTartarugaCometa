@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class RemetenteController {
@@ -14,12 +15,13 @@ public class RemetenteController {
 	private ServicoRemetente servico;
 	
 	@GetMapping("/incluirRemetente")
-	public String incluirRemetente(Model model) {
-		return "cadastroRemetente";
+	public String incluirRemetente(@ModelAttribute("remetente")Remetente remetente, Model model) {
+		return "/geral/dr/cadastroRemetente";
 	}
 	
 	@PostMapping("/salvarRemetente")
-	public void salvarRemetente(@ModelAttribute("remetente")Remetente remetente) {
+	public String salvarRemetente(@RequestBody Remetente remetente) {
 		servico.salvarRemetente(remetente);
+		return "index";
 	}
 }

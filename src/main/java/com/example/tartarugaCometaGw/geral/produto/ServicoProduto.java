@@ -10,6 +10,6 @@ public class ServicoProduto {
 	private RepositorioProduto repositorioProduto;
 	
 	public void salvarProduto(Produto obj) {
-		repositorioProduto.salvarDestinatario(obj.getId(), obj.getNome(), obj.getPeso(), obj.getVolume(), obj.getValor());
+		repositorioProduto.salvarProduto(obj.getId(), obj.getNome(), obj.getPeso(), obj.getVolume(), obj.getValor());
 	}
 }

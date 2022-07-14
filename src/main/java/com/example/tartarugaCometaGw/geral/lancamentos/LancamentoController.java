@@ -32,7 +32,7 @@ public class LancamentoController {
 	}
 	
 	@GetMapping("/incluirLancamento")
-	public String lancamento(Model model) {
+	public String lancamento(@ModelAttribute("lancamento")Lancamento lancamento, Model model) {
 		status = StatusFormularioEnum.INCLUIR;
 		List<Produto> lsProduto = servico.getListProdutos();
 		model.addAttribute("listProdutos", lsProduto);
@@ -43,12 +43,12 @@ public class LancamentoController {
 		List<Destinatario> lsDestinatario = servico.getListDestinatarios();
 		model.addAttribute("listDestinatarios", lsDestinatario);
 		
-		return "/geral/lc/cadastroLancamento";
+		return "geral/lc/cadastroLancamento";
 	}
 	
 	
 	@PostMapping("/salvarLancamento")
-	public String Inserirlancamento(@ModelAttribute("lancamento")Lancamento lancamento) {
+	public String Inserirlancamento(@ModelAttribute("lancamento") Lancamento lancamento) {
 		if(status == StatusFormularioEnum.ALTERAR) {
 			servico.alterar(lancamento);
 		} else {

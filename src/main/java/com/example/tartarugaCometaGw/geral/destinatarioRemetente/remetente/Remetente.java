@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.example.tartarugaCometaGw.geral.destinatarioRemetente.Endereco;
+import com.example.tartarugaCometaGw.nucleo.utils.Validation;
 
 @Entity
 @Table(name = "remetente")
@@ -47,7 +48,11 @@ public class Remetente implements Serializable{
 	public String getCnpjCnpf() {
 		return cnpjCnpf;
 	}
-	
+
+	public String getCnpjCnpfFormatado() {
+		return Validation.imprimeCNPJ(cnpjCnpf);
+	}
+
 	public void setCnpjCnpf(String cnpjCnpf) {
 		this.cnpjCnpf = cnpjCnpf;
 	}

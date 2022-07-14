@@ -13,6 +13,6 @@ public interface RepositorioProduto extends CrudRepository<Produto, Long>{
 	@Modifying
 	@Transactional
 	@Query(value = "INSERT INTO produto (ID_PRODUTO, NOME, PESO, VOLUME, VALOR) VALUES (:id, :nome, :peso, :volume, :valor)", nativeQuery = true)
-	public void salvarDestinatario(@Param("id") Long id, @Param("nome") String nome, @Param("peso") Float peso, @Param("volume") String volume, @Param("valor") Float valor);
+	public void salvarProduto(@Param("id") Long id, @Param("nome") String nome, @Param("peso") Float peso, @Param("volume") String volume, @Param("valor") Float valor);
 
 }

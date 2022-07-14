@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ProdutoController {
@@ -13,12 +14,13 @@ public class ProdutoController {
 	private ServicoProduto servicoProduto;
 	
 	@GetMapping("/incluirProduto")
-	public String produto() {
+	public String produto(@ModelAttribute("produto")Produto produto) {
 		return "geral/tp/cadastroProduto";
 	}
 	
 	@PostMapping("/salvarProduto")
-	public void salvarProduto(@ModelAttribute("produto")Produto produto) {
+	public String salvarProduto(@RequestBody Produto produto) {
 		servicoProduto.salvarProduto(produto);
+		return "index";
 	}
 }	

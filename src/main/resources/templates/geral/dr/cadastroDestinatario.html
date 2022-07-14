@@ -14,25 +14,29 @@
 		<h1>Tartaruga Cometa</h1>
 		<hr>
 		<form action="#" th:action="@{/salvarDestinatario}" th:object="${destinatario}" method="POST">
-			<input type="hidden" th:field="*{id}">			
+			<label th:each="id : ${idAuto}"  th:value="${id}" th:text="${id}"></label>
+			<input type="number" id="id" th:field="*{id}" class="form-control mb-4 col-4">
 			<label for="cnpj" >CNPJ/CNPF:</label>
 			<input type="text" id="cnpj" th:field="*{cnpjCnpf}" required="true" placeholder="CNPJ ou CNPF" class="form-control mb-4 col-4">
 
 			<label for="razaoSocial" >Razão Social:</label>
-			<input type="text" id="razaoSocial" th:field="*{razaoSocial}" placeholder="Razão Social" class="form-control mb-4 col-4">			
+			<input type="text" id="razaoSocial" th:field="*{razaoSocial}" required="true" placeholder="Razão Social" class="form-control mb-4 col-4">			
 
 			<label for="nome" >Nome Destinatário:</label>
 			<input type="text" id="nome" th:field="*{nome}" required="true" placeholder="Nome" class="form-control mb-4 col-4">
 			
 			<label for="endereco" >Descreva seu Endereço:</label>
-			<input type="text" id="endereco" th:field="*{endereco}" required="true" placeholder="Nome" class="form-control mb-4 col-4">
+			<input type="text" id="endereco" th:field="*{endereco}" required="true" placeholder="Nome Da rua/Bairro/Municipio/UF" class="form-control mb-4 col-4">
 			<br><br>
-			<button type="submit" disabled="true" class="btn btn-info col-2">Salvar</button>
+			<button type="submit" class="btn btn-info col-2">Salvar</button>
 
 		</form>
 		<hr>
+		<div id="divMsgError" th:each="m : ${msgError}">
+			<span th:text="${m}"></span>
+		</div>
 
-		<a th:href="@{/index}">Retornar para pagina inicial</a>
+		<a th:href="@{/vizualizarDestinatario}">Retornar para lista</a>
 	</div>
 </body>
 
