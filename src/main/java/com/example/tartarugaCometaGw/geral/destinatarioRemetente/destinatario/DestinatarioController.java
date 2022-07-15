@@ -41,7 +41,7 @@ public class DestinatarioController {
 		}
 
 		if (servico.salvarDestinatario(destinatario)) {
-			return "redirect:/vizualizarDestinatario";
+			return "redirect:/incluirLancamento";
 		} 
 
 		String msgErro = servico.getERRO();

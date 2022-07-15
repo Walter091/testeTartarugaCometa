@@ -36,6 +36,12 @@ public class Remetente implements Serializable{
 	
 	// ----------------------------------------------------
 	
+	public String toString() {
+		return id + " | " + cnpjCnpf + " | " + razaoSocial +  " | " 
+				+  nome + " | " + endereco;
+		
+	}
+
 	public Long getId() {
 		return id;
 	}

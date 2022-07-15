@@ -40,7 +40,7 @@ public class RemetenteController {
 			} 
 		}
 		if (servico.salvarRemetente(remetente)) {
-			return "redirect:/vizualizarRemetente";
+			return "redirect:/incluirProduto";
 		} 
 
 		String msgErro = servico.getERRO();

@@ -39,7 +39,7 @@ public class ProdutoController {
 			return "redirect:/vizualizarProduto";
 		} 
 		servico.salvarProduto(produto);
-		return "redirect:/vizualizarProduto";		
+		return "redirect:/incluirDestinatario";		
 	}
 	
 	@GetMapping("indexProduto/alterar/{id}") 
