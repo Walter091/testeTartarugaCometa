@@ -14,8 +14,7 @@
 		<h1>Tartaruga Cometa | Destinatário</h1>
 		<hr>
 		<form action="#" th:action="@{/salvarDestinatario}" th:object="${destinatario}" method="POST">
-			<label th:each="id : ${idAuto}"  th:value="${id}" th:text="${id}"></label>
-			<input type="number" id="id" th:field="*{id}" class="form-control mb-4 col-4">
+
 			<label for="cnpj" >CNPJ/CNPF:</label>
 			<input type="text" id="cnpj" th:field="*{cnpjCnpf}" required="true" placeholder="CNPJ ou CNPF" class="form-control mb-4 col-4">
 

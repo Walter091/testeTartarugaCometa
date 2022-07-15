@@ -14,29 +14,28 @@
 		<h1>Tartaruga Cometa | Lancamento</h1>
 		<hr>
 		<form action="#" th:action="@{/salvarLancamento}" th:object="${lancamento}" method="POST">
-			<input type="hidden" id="id" th:field="*{id}">
-			<select th:field="*{produto}">
+			<label for="seleProd">Selecione o Produto para Enviar ao Remetente:</label>
+			<select id="seleProd" th:field="*{produto}">
 				<option th:each="produtols : ${listProdutos}"
 					th:value="${produtols.id}" th:text="${produtols.nome}" required="true" selected="selected"></option>
 			</select>
-
-			<select th:field="*{remetente}">
+			<br><br>
+			<hr>
+			<label for="seleReme">Selecione o Remetente do Lançamento:</label>
+			<select id="seleReme" th:field="*{remetente}">
 				<option th:each="remetentels : ${listRemetentes}"
 					th:value="${remetentels.id}" th:text="${remetentels.nome}" required="true"></option>
 			</select>
-			
-			<select th:field="*{destinatario}">
+			<br><br>
+			<hr>
+			<label for="seleDest">Selecione o Destinatário que vai Receber o Produto:</label>
+			<select id="seleDest" th:field="*{destinatario}">
 				<option th:each="destinatariols : ${listDestinatarios}"
 					th:value="${destinatariols.id}" th:text="${destinatariols.nome}" required="true" selected="selected"></option>
 			</select>
 
-			<select th:field="*{statusLancamento}">
-				<option value="">Status do Lancamento</option>
-				<option th:each="status : ${T(com.example.tartarugaCometaGw.nucleo.StatusLancamentoEnum).values()}"
-					th:value="${status.id}" th:text="${status.descricao}" selected="selected"></option>
-			</select>
-
 			<br><br>
+			<hr>
 			<button type="submit" class="btn btn-info col-2">Salvar</button>
 
 		</form>

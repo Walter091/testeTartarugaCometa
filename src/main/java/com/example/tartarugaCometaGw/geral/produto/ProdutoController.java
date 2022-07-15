@@ -42,7 +42,7 @@ public class ProdutoController {
 		return "redirect:/vizualizarProduto";		
 	}
 	
-	@GetMapping("indexProduto/alterar/{id}")
+	@GetMapping("indexProduto/alterar/{id}") 
 	public String alterarProduto(@PathVariable("id") Long id, Model model) {
 		status = StatusFormularioEnum.ALTERAR;
 		Optional<Produto> prodOptional = servico.getProdutoPorId(id);

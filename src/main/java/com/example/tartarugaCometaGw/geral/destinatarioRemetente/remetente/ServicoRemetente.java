@@ -1,6 +1,5 @@
 package com.example.tartarugaCometaGw.geral.destinatarioRemetente.remetente;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class ServicoRemetente {
 	public boolean salvarRemetente(Remetente obj) {
 		try {
 			if (doAntesDeSalvar(obj)) {
-				repositorio.salvarRemetente(obj.getId(), obj.getCnpjCnpf(), obj.getNome(), obj.getRazaoSocial(), obj.getEndereco());
+				repositorio.save(obj);
 				return true;
 			} 
 			
@@ -41,19 +40,19 @@ public class ServicoRemetente {
 	}
 	
 	public void excluir(long id) {
-		repositorio.excluir(id);
+		repositorio.deleteById(id);
 	}
 
 	public Integer obterId() {
 		return repositorio.obterId() == null ? 1 : repositorio.obterId()+1;
 	}
 
-	public List<Remetente> obterListaRemetente(){
-		return repositorio.obterListaRemetente() == null ? null : repositorio.obterListaRemetente();
+	public Iterable<Remetente> obterListaRemetente(){
+		return repositorio.findAll();
 	}
 
 	public Optional<Remetente> getRemetentePorId(Long id){
-		return repositorio.getById(id);
+		return repositorio.findById(id);
 	}
 
 	public Remetente getRemetentePorIdNQ(Long id){

@@ -14,8 +14,6 @@
 		<h1>Tartaruga Cometa | Produto </h1>
 		<hr>
 		<form action="#" th:action="@{/salvarProduto}" th:object="${produto}" method="POST">
-			<label th:each="id : ${idAuto}"  th:value="${id}" th:text="${id}"></label>
-			<input type="number" th:field="*{id}" class="form-control mb-4 col-4">
 			
 			<label for="nome" >Nome do Produto:</label>
 			<input id="nome" type="text" th:field="*{nome}" required="true" placeholder="Nome" class="form-control mb-4 col-4">

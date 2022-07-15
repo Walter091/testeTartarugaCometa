@@ -1,6 +1,5 @@
 package com.example.tartarugaCometaGw.geral.lancamentos;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +33,13 @@ public class LancamentoController {
 	@GetMapping("/incluirLancamento")
 	public String lancamento(@ModelAttribute("lancamento")Lancamento lancamento, Model model) {
 		status = StatusFormularioEnum.INCLUIR;
-		List<Produto> lsProduto = servico.getListProdutos();
+		Iterable<Produto> lsProduto = servico.getListProdutos();
 		model.addAttribute("listProdutos", lsProduto == null ? " " : lsProduto);
 
-		List<Remetente> lsRemetente= servico.getListRemetentes();
+		Iterable<Remetente> lsRemetente= servico.getListRemetentes();
 		model.addAttribute("listRemetentes", lsRemetente == null ? " " : lsRemetente);
 
-		List<Destinatario> lsDestinatario = servico.getListDestinatarios();
+		Iterable<Destinatario> lsDestinatario = servico.getListDestinatarios();
 		model.addAttribute("listDestinatarios", lsDestinatario == null ? " " : lsDestinatario);
 		
 		return "geral/lc/cadastroLancamento";
@@ -58,7 +57,7 @@ public class LancamentoController {
 	}
 	
 	@GetMapping("indexLancamento/alterar/{id}")
-	public String alterarLancamento(@PathVariable("id") Integer id, Model model) {
+	public String alterarLancamento(@PathVariable("id") Long id, Model model) {
 		status = StatusFormularioEnum.ALTERAR;
 		Optional<Lancamento> lancOptional = servico.getLancamentoPorId(id);
 		if (lancOptional.isEmpty()) {
@@ -70,7 +69,7 @@ public class LancamentoController {
 	}
 
 	@GetMapping("/indexLancamento/excluir/{id}")
-	public String excluirLancamento(@PathVariable("id") Integer id, Model model) {
+	public String excluirLancamento(@PathVariable("id") Long id, Model model) {
 		status = StatusFormularioEnum.EXCLUIR;
 		Lancamento obj = servico.getLancamentoPorIdNQ(id);
 		if (obj == null) {

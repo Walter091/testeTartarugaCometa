@@ -1,6 +1,5 @@
 package com.example.tartarugaCometaGw.geral.destinatarioRemetente.destinatario;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class ServicoDestinatario {
 	public boolean salvarDestinatario(Destinatario obj) {
 		try {
 			if (doAntesDeSalvar(obj)) {
-				repositorio.salvarDestinatario(obj.getId(), obj.getCnpjCnpf(), obj.getRazaoSocial(), obj.getNome(), obj.getEndereco());
+				repositorio.save(obj);
 				return true;
 			} 
 			
@@ -41,19 +40,19 @@ public class ServicoDestinatario {
 	}
 	
 	public void excluir(long id) {
-		repositorio.excluir(id);
+		repositorio.deleteById(id);
 	}
 
 	public Integer obterId() {
 		return repositorio.obterId()+1;
 	}
 	
-	public List<Destinatario> obterListaDestinatarios(){
-		return repositorio.obterListaDestinatarios() == null ? null : repositorio.obterListaDestinatarios();
+	public Iterable<Destinatario> obterListaDestinatarios(){
+		return repositorio.findAll();
 	}
 	
 	public Optional<Destinatario> getDestinatarioPorId(Long id){
-		return repositorio.getById(id);
+		return repositorio.findById(id);
 	}
 
 	public Destinatario getDestinatarioPorIdNQ(Long id){
