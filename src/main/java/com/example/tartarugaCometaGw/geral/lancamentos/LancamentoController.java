@@ -28,20 +28,20 @@ public class LancamentoController {
 	public String vizualizarLancamento(Model model) {
 		status = StatusFormularioEnum.VIZUALIZAR;
 		model.addAttribute("listLancamentos", servico.getLancamentos());
-		return "/geral/lc/vizualizarLancamentos";
+		return "geral/lc/vizualizarLancamentos";
 	}
 	
 	@GetMapping("/incluirLancamento")
 	public String lancamento(@ModelAttribute("lancamento")Lancamento lancamento, Model model) {
 		status = StatusFormularioEnum.INCLUIR;
 		List<Produto> lsProduto = servico.getListProdutos();
-		model.addAttribute("listProdutos", lsProduto);
+		model.addAttribute("listProdutos", lsProduto == null ? " " : lsProduto);
 
 		List<Remetente> lsRemetente= servico.getListRemetentes();
-		model.addAttribute("listRemetentes", lsRemetente);
+		model.addAttribute("listRemetentes", lsRemetente == null ? " " : lsRemetente);
 
 		List<Destinatario> lsDestinatario = servico.getListDestinatarios();
-		model.addAttribute("listDestinatarios", lsDestinatario);
+		model.addAttribute("listDestinatarios", lsDestinatario == null ? " " : lsDestinatario);
 		
 		return "geral/lc/cadastroLancamento";
 	}
@@ -54,11 +54,11 @@ public class LancamentoController {
 		} else {
 			servico.salvar(lancamento);
 		}
-		return "index";
+		return "redirect:/vizualizarLancamento";
 	}
 	
 	@GetMapping("indexLancamento/alterar/{id}")
-	public String alterarColaborador(@PathVariable("id") Integer id, Model model) {
+	public String alterarLancamento(@PathVariable("id") Integer id, Model model) {
 		status = StatusFormularioEnum.ALTERAR;
 		Optional<Lancamento> lancOptional = servico.getLancamentoPorId(id);
 		if (lancOptional.isEmpty()) {
@@ -66,11 +66,11 @@ public class LancamentoController {
 		}
 		model.addAttribute("lancamento", lancOptional.get());
 		
-		return "/lc/cadastroLancamento";
+		return "geral/lc/cadastroLancamento";
 	}
 
 	@GetMapping("/indexLancamento/excluir/{id}")
-	public String excluirColaborador(@PathVariable("id") Integer id, Model model) {
+	public String excluirLancamento(@PathVariable("id") Integer id, Model model) {
 		status = StatusFormularioEnum.EXCLUIR;
 		Lancamento obj = servico.getLancamentoPorIdNQ(id);
 		if (obj == null) {
@@ -78,7 +78,7 @@ public class LancamentoController {
 		}
 		
 		servico.excluir(obj.getId());
-		return "redirect:/index";
+		return "redirect:/vizualizarLancamento";
 	}
 
 }

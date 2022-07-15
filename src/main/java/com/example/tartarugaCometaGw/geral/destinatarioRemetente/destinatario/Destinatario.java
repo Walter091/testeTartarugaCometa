@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.example.tartarugaCometaGw.geral.lancamentos.Lancamento;
 import com.example.tartarugaCometaGw.nucleo.utils.Validation;
 
 @Entity
@@ -22,9 +21,6 @@ public class Destinatario implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID_DESTINATARIO")
 	private Long id;
-	
-	@Column(name = "ID_LANCAMENTO")
-	private Lancamento lancamento;
 	
 	@Column(name = "CNPJ_CNPF")
 	private String cnpjCnpf;
@@ -46,14 +42,6 @@ public class Destinatario implements Serializable{
 	
 	public void setId(Long id) {
 		this.id = id;
-	}
-	
-	public Lancamento getLancamento() {
-		return lancamento;
-	}
-
-	public void setLancamento(Lancamento lancamento) {
-		this.lancamento = lancamento;
 	}
 
 	public String getCnpjCnpf() {

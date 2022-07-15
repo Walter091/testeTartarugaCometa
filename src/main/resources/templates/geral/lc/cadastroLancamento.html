@@ -22,7 +22,7 @@
 
 			<select th:field="*{remetente}">
 				<option th:each="remetentels : ${listRemetentes}"
-					th:value="${remetentels.id}" th:text="${remetentels.nome}" required="true" selected="selected"></option>
+					th:value="${remetentels.id}" th:text="${remetentels.nome}" required="true"></option>
 			</select>
 			
 			<select th:field="*{destinatario}">
@@ -42,7 +42,7 @@
 		</form>
 		<hr>
 
-		<a th:href="@{/entrar}">Retornar para pagina inicial</a>
+		<a th:href="@{/vizualizarLancamento}">Retornar para pagina inicial</a>
 	</div>
 </body>
 

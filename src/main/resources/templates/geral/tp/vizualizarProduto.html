@@ -36,8 +36,8 @@
 					<td th:text="${produto.volume}"></td>
 					<td th:text="${produto.valorFormatado}"></td>
 					<td>
-						<a th:href="@{/indexProduto/alterar/{id}(id=${remetente.id})}" class="btn btn-primary">Alterar</a>
-						<a th:href="@{/indexProduto/excluir/{id}(id=${remetente.id})}" class="btn btn-danger">Excluir</a>
+						<a th:href="@{/indexProduto/alterar/{id}(id=${produto.id})}" class="btn btn-primary">Alterar</a>
+						<a th:href="@{/indexProduto/excluir/{id}(id=${produto.id})}" class="btn btn-danger">Excluir</a>
 					</td>
 				</tr>
 			</tbody>
