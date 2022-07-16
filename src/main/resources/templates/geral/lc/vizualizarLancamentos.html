@@ -30,9 +30,9 @@
 			</thead>
 			<tbody>
 				<tr th:each="lancamento : ${listLancamentos}">
-					<td th:text="${lancamento.produto.nome}"></td>
-					<td th:text="${lancamento.remetente.nome}"></td>
-					<td th:text="${lancamento.destinatario.nome}"></td>
+					<td th:text="${lancamento.produto}"></td>
+					<td th:text="${lancamento.remetente}"></td>
+					<td th:text="${lancamento.destinatario}"></td>
 					<td>
 						<a th:href="@{/indexLancamento/alterar/{id}(id=${lancamento.id})}" class="btn btn-primary">Alterar</a>
 						<a th:href="@{/indexLancamento/excluir/{id}(id=${lancamento.id})}" class="btn btn-danger">Excluir</a>

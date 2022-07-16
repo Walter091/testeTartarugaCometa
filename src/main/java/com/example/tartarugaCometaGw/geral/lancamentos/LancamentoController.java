@@ -45,25 +45,6 @@ public class LancamentoController {
 		return "geral/lc/cadastroLancamento";
 	}
 	
-//	@GetMapping("indexlancamento/finalizar/{idDestinatario}/{idRemetente}/{idProduto}")
-//	public String finalizarCadastro(@PathVariable("idDestinatario") Long idDestinatario,
-//			@PathVariable("idRemetente") Long idRemetente,
-//			@PathVariable("idProduto") Long idProduto,
-//			Model model) {
-//		
-//		Optional<Destinatario> DestOptional = servico.getDestinatarioPorId(idDestinatario);
-//		model.addAttribute("destinarario", DestOptional.get());
-//
-//		Optional<Remetente> RemetenteOptional = servico.getRemetentePorId(idRemetente);
-//		model.addAttribute("destinarario", RemetenteOptional.get());
-//
-//		Optional<Produto> ProdOptional = servico.getProdutoPorId(idProduto);
-//		model.addAttribute("destinarario", ProdOptional.get());
-//		
-//		return "geral/lc/cadastroLancamento";
-//	}
-		
-	
 	@PostMapping("/salvarLancamento")
 	public String Inserirlancamento(@ModelAttribute("lancamento") Lancamento lancamento) {
 		if(status == StatusFormularioEnum.ALTERAR) {

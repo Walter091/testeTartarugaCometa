@@ -22,7 +22,6 @@ public class DestinatarioController {
 	
 	@GetMapping("/incluirDestinatario")
 	public String incluirDestinatario(@ModelAttribute("destinatario")Destinatario destinatario, Model model) {
-		model.addAttribute("idAuto", "O seu id é: " + servico.obterId());
 		return "/geral/dr/cadastroDestinatario";
 	}
 	

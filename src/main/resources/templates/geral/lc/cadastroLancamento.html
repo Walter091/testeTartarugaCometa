@@ -13,11 +13,11 @@
 
 <body>
 	<div class="container my-2">
-		<h1>Tartaruga Cometa | Lancamento</h1>
+		<h1>Tartaruga Cometa | Lançamento</h1>
 		<hr>
 		<form action="#" th:action="@{/salvarLancamento}" th:object="${lancamento}" method="POST">
-
-			<label for="seleProd">Selecione o Produto para Enviar ao Remetente:</label>
+			
+			<label for="seleProd">Selecione o Produto:</label>
 			<select id="seleProd" th:field="*{produto}" class="form-select form-select-sm" aria-label=".form-select-sm example">
 				<option th:each="produtols : ${listProdutos}"
 					th:value="${produtols.id}" th:text="${produtols.toString}" required="true" selected="selected"></option>
@@ -31,10 +31,10 @@
 			</select>
 			<br>
 			<hr>
-			<label for="seleDest">Selecione o Destinatário que vai Receber o Produto:</label>
+			<label for="seleDest">Selecione o Destinatário do Lançamento:</label>
 			<select id="seleDest" th:field="*{destinatario}" class="form-select form-select-sm" aria-label=".form-select-sm example">
 				<option th:each="destinatariols : ${listDestinatarios}"
-					th:value="${destinatariols.id}" th:text="${destinatariols.toString}" required="true" selected="selected"></option>
+					th:value="${destinatariols.id}" th:text="${destinatariols.toString}" required="true"></option>
 			</select>
 			<br>
 			<hr>
@@ -43,15 +43,12 @@
 					th:value="${status.id}" th:text="${status.descricao}" th:disabled="${statusLancamento}"
 					selected="selected"></option>
 			</select>
-
 			<br><br>
 			<hr>
 			<button type="submit" class="btn btn-info col-2">Salvar</button>
 
 		</form>
 		<hr>
-
-		<a th:href="@{/vizualizarLancamento}">Retornar para pagina inicial</a>
 	</div>
 </body>
 

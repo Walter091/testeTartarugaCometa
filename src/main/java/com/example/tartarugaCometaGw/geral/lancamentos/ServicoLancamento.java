@@ -34,7 +34,7 @@ public class ServicoLancamento {
 	}
 	
 	public void alterar(Lancamento obj) {
-		repositorio.alterar(obj.getId(), obj.getProduto().getId(), obj.getRemetente().getId(), obj.getDestinatario().getId());
+		repositorio.alterar(obj.getId(), obj.getProduto(), obj.getRemetente(), obj.getDestinatario());
 	}
 	
 	public void excluir(long id) {

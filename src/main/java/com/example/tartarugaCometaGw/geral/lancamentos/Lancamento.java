@@ -9,10 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.example.tartarugaCometaGw.geral.destinatarioRemetente.destinatario.Destinatario;
-import com.example.tartarugaCometaGw.geral.destinatarioRemetente.remetente.Remetente;
-import com.example.tartarugaCometaGw.geral.produto.Produto;
-
 @Entity
 @Table(name = "lancamento")
 public class Lancamento implements Serializable{
@@ -20,18 +16,18 @@ public class Lancamento implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID_LANCAMENTO")
 	private Long id;
 	
 	@Column(name = "ID_PRODUTO")
-	private Produto produto;
+	private Long produto;
 	
 	@Column(name = "ID_REMETENTE")
-	private Remetente remetente;
+	private Long remetente;
 	
 	@Column(name = "ID_DESTINATARIO")
-	private Destinatario destinatario;
+	private Long destinatario;
 		
 	@Column(name = "IND_STATUS_LANCAMENTO")
 	private int statusLancamento;
@@ -46,27 +42,27 @@ public class Lancamento implements Serializable{
 		this.id = id;
 	}
 	
-	public Produto getProduto() {
+	public Long getProduto() {
 		return produto;
 	}
-	
-	public void setProduto(Produto produto) {
+
+	public void setProduto(Long produto) {
 		this.produto = produto;
 	}
-	
-	public Remetente getRemetente() {
+
+	public Long getRemetente() {
 		return remetente;
 	}
-	
-	public void setRemetente(Remetente remetente) {
+
+	public void setRemetente(Long remetente) {
 		this.remetente = remetente;
 	}
-	
-	public Destinatario getDestinatario() {
+
+	public Long getDestinatario() {
 		return destinatario;
 	}
-	
-	public void setDestinatario(Destinatario destinatario) {
+
+	public void setDestinatario(Long destinatario) {
 		this.destinatario = destinatario;
 	}
 
