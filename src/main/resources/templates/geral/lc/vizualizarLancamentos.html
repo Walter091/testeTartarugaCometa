@@ -21,21 +21,28 @@
 		<table border="1" class="table table-striped table-responsive-md">
 			<thead>
 				<tr>
-					<th>Produto</th>
-					<th>Remetente</th>
-					<th>Destinatario</th>
+					<th>Id</th>
 					<th>Status</th>
-
+					<th>Remetente</th>
+					<th>Produto</th>
+					<th>Destinatario</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="lancamento : ${listLancamentos}">
-					<td th:text="${lancamento.produto}"></td>
-					<td th:text="${lancamento.remetente}"></td>
-					<td th:text="${lancamento.destinatario}"></td>
+					<td th:text="${lancamento.id}"></td>
+					<td th:text="${lancamento.statusLancamento}"></td>
 					<td>
-						<a th:href="@{/indexLancamento/alterar/{id}(id=${lancamento.id})}" class="btn btn-primary">Alterar</a>
-						<a th:href="@{/indexLancamento/excluir/{id}(id=${lancamento.id})}" class="btn btn-danger">Excluir</a>
+						<a th:href="@{/indexRemetente/alterar/{id}(id=${lancamento.remetente})}" class="btn btn-primary">Vizualizar/Alterar</a>
+					</td>
+					<td>
+						<a th:href="@{/indexProduto/alterar/{id}(id=${lancamento.produto})}" class="btn btn-primary">Vizualizar/Alterar</a>
+					</td>
+					<td>
+						<a th:href="@{/indexDestinatario/alterar/{id}(id=${lancamento.destinatario})}" class="btn btn-primary">Vizualizar/Alterar</a>
+					</td>
+					<td>
+						<a th:href="@{/indexLancamento/excluir/{id}(id=${lancamento.id})}" class="btn btn-danger">Excluir Lançamento</a>
 					</td>
 
 				</tr>

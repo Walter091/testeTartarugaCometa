@@ -30,18 +30,18 @@ public class Lancamento implements Serializable{
 	private Long destinatario;
 		
 	@Column(name = "IND_STATUS_LANCAMENTO")
-	private int statusLancamento;
+	private int statusLancamento = 1;
 	
 	// -----------------------------------------------------------
 	
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public Long getProduto() {
 		return produto;
 	}
@@ -73,4 +73,5 @@ public class Lancamento implements Serializable{
 	public void setStatusLancamento(int statusLancamento) {
 		this.statusLancamento = statusLancamento;
 	}
+		
 }

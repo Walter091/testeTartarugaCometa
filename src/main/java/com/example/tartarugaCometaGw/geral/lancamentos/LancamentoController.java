@@ -1,7 +1,5 @@
 package com.example.tartarugaCometaGw.geral.lancamentos;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,15 +21,19 @@ public class LancamentoController {
 	
 	private StatusFormularioEnum status;
 	
+	// -------------------------------------------------------------------
+
 	@GetMapping("/vizualizarLancamento")
 	public String vizualizarLancamento(Model model) {
 		status = StatusFormularioEnum.VIZUALIZAR;
 		model.addAttribute("listLancamentos", servico.getLancamentos());
 		return "geral/lc/vizualizarLancamentos";
 	}
-	
+
+	// -------------------------------------------------------------------
+
 	@GetMapping("/incluirLancamento")
-	public String lancamento(@ModelAttribute("lancamento")Lancamento lancamento, Model model) {
+	public String inserirLancamento(@ModelAttribute("lancamento")Lancamento lancamento, Model model) {
 		status = StatusFormularioEnum.INCLUIR;
 		Iterable<Produto> lsProduto = servico.getListProdutos();
 		model.addAttribute("listProdutos", lsProduto == null ? " " : lsProduto);
@@ -46,7 +48,7 @@ public class LancamentoController {
 	}
 	
 	@PostMapping("/salvarLancamento")
-	public String Inserirlancamento(@ModelAttribute("lancamento") Lancamento lancamento) {
+	public String salvarlancamento(@ModelAttribute("lancamento") Lancamento lancamento) {
 		if(status == StatusFormularioEnum.ALTERAR) {
 			servico.alterar(lancamento);
 		} else {
@@ -55,16 +57,17 @@ public class LancamentoController {
 		return "redirect:/vizualizarLancamento";
 	}
 	
-	@GetMapping("indexLancamento/alterar/{id}")
+	@GetMapping("/indexLancamento/alterar/{id}")
 	public String alterarLancamento(@PathVariable("id") Long id, Model model) {
 		status = StatusFormularioEnum.ALTERAR;
-		Optional<Lancamento> lancOptional = servico.getLancamentoPorId(id);
-		if (lancOptional.isEmpty()) {
+		Lancamento lancOptional = servico.getLancamentoPorIdNQ(id);
+		if (lancOptional == null) {
 			throw new IllegalArgumentException("Lançamento Inválido");
 		}
-		model.addAttribute("lancamento", lancOptional.get());
-		
-		return "geral/lc/cadastroLancamento";
+	
+		model.addAttribute("lancamento", lancOptional);
+		return "redirect:/incluirLancamento";
+
 	}
 
 	@GetMapping("/indexLancamento/excluir/{id}")
@@ -75,7 +78,7 @@ public class LancamentoController {
 			throw new IllegalArgumentException("Lançamento Inválido");
 		}
 		
-		servico.excluir(obj.getId());
+		servico.excluir(obj);
 		return "redirect:/vizualizarLancamento";
 	}
 

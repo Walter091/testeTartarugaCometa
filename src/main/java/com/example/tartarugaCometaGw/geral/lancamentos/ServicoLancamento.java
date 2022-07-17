@@ -26,7 +26,7 @@ public class ServicoLancamento {
 
 	@Autowired
 	private RepositorioDestinatario repositorioDestinatario;
-
+		
 	// -----------------------------------------------------------
 
 	public void salvar(Lancamento obj) {
@@ -34,14 +34,40 @@ public class ServicoLancamento {
 	}
 	
 	public void alterar(Lancamento obj) {
-		repositorio.alterar(obj.getId(), obj.getProduto(), obj.getRemetente(), obj.getDestinatario());
+		repositorio.alterar(obj.getId(), obj.getProduto(), obj.getRemetente(), obj.getDestinatario(), obj.getStatusLancamento());		
+	}
+
+	public void excluir(Lancamento obj) {
+		repositorio.delete(obj);
 	}
 	
-	public void excluir(long id) {
-		repositorio.deleteById(id);
+	// -----------------------------------------------------------
+	
+	public Iterable<Lancamento> getLancamentos(){
+		return repositorio.findAll();
+	}
+
+	public Optional<Lancamento> getLancamentoPorId(Long id){
+		return repositorio.findById(id);
+	}
+
+	public Lancamento getLancamentoPorIdNQ(Long id){
+		return repositorio.getByIdQN(id);
 	}
 
 	// -----------------------------------------------------------
+
+	public Optional<Produto> getProduto(Long id) {
+		return repositorioProduto.findById(id);
+	}
+
+	public Optional<Remetente> getRemetente(Long id) {
+		return repositorioRemetente.findById(id);
+	}
+
+	public Optional<Destinatario> getDestinario(Long id) {
+		return repositorioDestinatario.findById(id);
+	}
 	
 	public Iterable<Produto> getListProdutos() {
 		return repositorioProduto.findAll();
@@ -50,21 +76,9 @@ public class ServicoLancamento {
 	public Iterable<Remetente> getListRemetentes() {
 		return repositorioRemetente.findAll();
 	}
-	
+
 	public Iterable<Destinatario> getListDestinatarios() {
 		return repositorioDestinatario.findAll();
 	}
-	
-	public Iterable<Lancamento> getLancamentos(){
-		return repositorio.findAll();
-	}
-	
-	public Optional<Lancamento> getLancamentoPorId(Long id){
-		return repositorio.findById(id);
-	}
 
-	public Lancamento getLancamentoPorIdNQ(Long id){
-		return repositorio.getByIdQN(id);
-	}
-		
 }
