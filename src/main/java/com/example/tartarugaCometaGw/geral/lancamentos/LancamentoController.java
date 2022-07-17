@@ -66,7 +66,7 @@ public class LancamentoController {
 		}
 	
 		model.addAttribute("lancamento", lancOptional);
-		return "redirect:/incluirLancamento";
+		return "geral/lc/alterarLancamento";
 
 	}
 

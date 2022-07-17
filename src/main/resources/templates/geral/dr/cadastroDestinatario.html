@@ -15,14 +15,17 @@
 		<hr>
 		<form action="#" th:action="@{/salvarDestinatario}" th:object="${destinatario}" method="POST">
 
-			<label for="cnpj" >CNPJ/CNPF:</label>
-			<input type="text" id="cnpj" th:field="*{cnpjCnpf}" required="true" placeholder="CNPJ ou CNPF" class="form-control mb-4 col-4">
+			<label for="cnpj" >CNPJ:</label>
+			<input type="text" id="cnpj" th:field="*{cnpj}" placeholder="CNPJ (CASO PESSOA JURÍDICA)" class="form-control mb-4 col-4">
 
 			<label for="razaoSocial" >Razão Social:</label>
-			<input type="text" id="razaoSocial" th:field="*{razaoSocial}" required="true" placeholder="Razão Social" class="form-control mb-4 col-4">			
+			<input type="text" id="razaoSocial" th:field="*{razaoSocial}" placeholder="Razão Social" class="form-control mb-4 col-4">			
 
-			<label for="nome" >Nome Destinatário:</label>
-			<input type="text" id="nome" th:field="*{nome}" required="true" placeholder="Nome" class="form-control mb-4 col-4">
+			<label for="nome" >Nome Destinatário (Caso Pessoa física):</label>
+			<input type="text" id="nome" th:field="*{nome}" placeholder="Nome" class="form-control mb-4 col-4">
+
+			<label for="cpf" >CPF (Caso Pessoa física):</label>
+			<input type="text" id="cpf" th:field="*{cpf}" placeholder="CPF (CASO PESSOA FÍSICA)" class="form-control mb-4 col-4">
 			
 			<label for="endereco" >Descreva seu Endereço:</label>
 			<input type="text" id="endereco" th:field="*{endereco}" required="true" placeholder="Nome Da rua/Bairro/Municipio/UF" class="form-control mb-4 col-4">

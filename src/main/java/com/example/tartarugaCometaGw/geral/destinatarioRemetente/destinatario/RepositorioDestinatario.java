@@ -13,18 +13,15 @@ public interface RepositorioDestinatario extends CrudRepository<Destinatario, Lo
 	
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE destinatario SET CNPJ_CNPF= :cnpj, RAZAO_SOCIAL= :razaoSocial, NOME=:nome, ENDERECO= :endereco WHERE ID_DESTINATARIO= :id", nativeQuery = true)
-	public void alterar(@Param("id") Long id, @Param("cnpj") String cnpj, @Param("razaoSocial") String razaoSocial, @Param("nome") String nome, @Param("endereco") String endereco);
+	@Query(value = "UPDATE destinatario SET CNPJ= :cnpj, CPF= :cpf, RAZAO_SOCIAL= :razaoSocial, NOME=:nome, ENDERECO= :endereco WHERE ID_DESTINATARIO= :id", nativeQuery = true)
+	public void alterar(@Param("id") Long id, @Param("cnpj") String cnpj, @Param("cpf") String cpf, @Param("razaoSocial") String razaoSocial, @Param("nome") String nome, @Param("endereco") String endereco);
 	
 	// -----------------------------------------------------------------------------------------------
 	
-	@Query(value = "SELECT * FROM destinatario where CNPJ_CNPF=:cnpj", nativeQuery = true)
+	@Query(value = "SELECT * FROM destinatario where CNPJ=:cnpj", nativeQuery = true)
 	public Destinatario validarCnpjRepetido(@Param("cnpj") String cnpj);
-	
-	@Query(value = "SELECT MAX(ID_DESTINATARIO) FROM destinatario", nativeQuery = true)
-	public Integer obterId(); 
 
-	@Query(value = "SELECT * FROM destinatario WHERE ID_DESTINATARIO= :id", nativeQuery = true)
-	public Destinatario getByIdQN(@Param("id") Long id);
-	
+	@Query(value = "SELECT * FROM destinatario where CPF=:cpf", nativeQuery = true)
+	public Destinatario validarCpfRepetido(@Param("cpf") String cpf);
+		
 }

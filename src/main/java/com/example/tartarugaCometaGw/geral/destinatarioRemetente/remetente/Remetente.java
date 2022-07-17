@@ -22,8 +22,11 @@ public class Remetente implements Serializable{
 	@Column(name = "ID_REMETENTE")
 	private Long id;
 	
-	@Column(name = "CNPJ_CNPF")
-	private String cnpjCnpf;
+	@Column(name = "CNPJ")
+	private String cnpj;
+
+	@Column(name = "CPF")
+	private String cpf;
 	
 	@Column(name = "RAZAO_SOCIAL")
 	private String razaoSocial;
@@ -35,12 +38,6 @@ public class Remetente implements Serializable{
 	private String endereco;
 	
 	// ----------------------------------------------------
-	
-	public String toString() {
-		return id + " | " + cnpjCnpf + " | " + razaoSocial +  " | " 
-				+  nome + " | " + endereco;
-		
-	}
 
 	public Long getId() {
 		return id;
@@ -50,18 +47,30 @@ public class Remetente implements Serializable{
 		this.id = id;
 	}
 	
-	public String getCnpjCnpf() {
-		return cnpjCnpf;
+	public String getCnpj() {
+		return cnpj;
 	}
 
-	public String getCnpjCnpfFormatado() {
-		return Validation.imprimeCNPJ(cnpjCnpf);
+	public String getCnpjFormatado() {
+		return Validation.imprimeCNPJ(cnpj);
 	}
 
-	public void setCnpjCnpf(String cnpjCnpf) {
-		this.cnpjCnpf = cnpjCnpf;
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
-	
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public String getCpfFormatado() {
+		return Validation.formatCPF(cpf);
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	public String getRazaoSocial() {
 		return razaoSocial;
 	}
@@ -84,6 +93,12 @@ public class Remetente implements Serializable{
 	
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+	public String toString() {
+		return id + " | " + cnpj + " | " + razaoSocial +  " | " 
+				+  nome + " | " + endereco;
+		
 	}
 
 	

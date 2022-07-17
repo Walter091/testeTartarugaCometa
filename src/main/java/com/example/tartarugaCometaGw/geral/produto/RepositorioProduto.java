@@ -16,13 +16,5 @@ public interface RepositorioProduto extends CrudRepository<Produto, Long>{
 	@Query(value = "UPDATE produto SET NOME= :nome, PESO= :peso, VOLUME=:volume, VALOR= :valor WHERE ID_PRODUTO= :id", nativeQuery = true)
 	public void alterar(@Param("id") Long id, @Param("nome") String nome, @Param("peso") Float peso, @Param("volume") String volume, @Param("valor") Float valor);
 	
-	// -----------------------------------------------------------------------------------------------
-	
-	@Query(value = "SELECT MAX(ID_PRODUTO) FROM produto", nativeQuery = true)
-	public Integer obterId(); 
-
-	@Query(value = "SELECT * FROM produto WHERE ID_PRODUTO= :id", nativeQuery = true)
-	public Produto getByIdQN(@Param("id") Long id);
-	
 
 }

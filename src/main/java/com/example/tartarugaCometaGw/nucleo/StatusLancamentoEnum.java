@@ -1,6 +1,5 @@
 package com.example.tartarugaCometaGw.nucleo;
 
-
 public enum StatusLancamentoEnum implements ItfcEnumBase{
 		
 	RECEBIDO("RECEBIDO", "IN", 0),
@@ -17,7 +16,18 @@ public enum StatusLancamentoEnum implements ItfcEnumBase{
 	}
 	
 	// -------------------------------------------------------------------------------------
-
+	
+	public static String obterPorID(Integer id) {
+		String result = null;
+		if (id == 0) {
+			result = StatusLancamentoEnum.RECEBIDO.descricao; 
+		}
+		if (id == 1) {
+			result = StatusLancamentoEnum.PENDENTE.descricao; 
+		}
+		return result;
+	}
+	
 	@Override
 	public String getDescricao() {
 		return descricao;

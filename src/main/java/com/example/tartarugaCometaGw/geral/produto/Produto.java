@@ -35,12 +35,7 @@ public class Produto implements Serializable{
 	private Float valor;
 	
 	// ---------------------------------------------------------------------
-	public String toString() {
-		return id + " | " + nome + " | " + peso.toString() +  " | " 
-				+  volume + " | " + getValorFormatado();
-		
-	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -85,4 +80,9 @@ public class Produto implements Serializable{
 		this.valor = valor;
 	}
 
+	public String toString() {
+		return id + " | " + nome + " | " + peso.toString() +  " | " 
+				+  volume + " | " + getValorFormatado();
+		
+	}
 }

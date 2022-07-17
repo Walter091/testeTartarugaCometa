@@ -30,8 +30,10 @@ public class ServicoDestinatario {
 	
 	public boolean alterar(Destinatario obj) {
 		try {
-			repositorio.alterar(obj.getId(), obj.getCnpjCnpf(), obj.getRazaoSocial(), obj.getNome(), obj.getEndereco());
-			return true;
+			if (doAntesDeAlterar(obj)) {
+				repositorio.alterar(obj.getId(), obj.getCnpj(), obj.getCpf(), obj.getRazaoSocial(), obj.getNome(), obj.getEndereco());
+				return true;				
+			}
 			
 		} catch (Exception e) {
 			e.getMessage();
@@ -39,37 +41,44 @@ public class ServicoDestinatario {
 		return false;
 	}
 	
-	public void excluir(long id) {
-		repositorio.deleteById(id);
-	}
-
-	public Integer obterId() {
-		return repositorio.obterId()+1;
-	}
-	
-	public Iterable<Destinatario> obterListaDestinatarios(){
-		return repositorio.findAll();
-	}
-	
 	public Optional<Destinatario> getDestinatarioPorId(Long id){
 		return repositorio.findById(id);
 	}
 
-	public Destinatario getDestinatarioPorIdNQ(Long id){
-		return repositorio.getByIdQN(id);
-	}
-
 	// --------------------------------------------------------------
 	
-	public boolean doAntesDeSalvar(Destinatario obj) {
-		if((Validation.isCNPJ(obj.getCnpjCnpf()))) {
-			setERRO("CNPJ INVÁLIDO");
+	public boolean doAntesDeAlterar(Destinatario obj) {
+		if (repositorio.validarCnpjRepetido(obj.getCnpj()) != null) {
+			setERRO("CNPJ JÁ CADASTRADO");
 			return false;
-		} 
-		if (repositorio.validarCnpjRepetido(obj.getCnpjCnpf()) != null) {
-			setERRO("CNPJ Já CADASTRADO");
+		} else if (repositorio.validarCpfRepetido(obj.getCpf()) != null) {
+			setERRO("CPF JÁ CADASTRADO");
 			return false;
 		}
+		return true;
+	}
+	
+	public boolean doAntesDeSalvar(Destinatario obj) {
+		Validation vl = new Validation();
+		if (obj.getCnpj() != null) {
+			if((vl.isCNPJ(obj.getCnpj()))) {
+				setERRO("CNPJ INVÁLIDO");
+				return false;
+			} else if (repositorio.validarCnpjRepetido(obj.getCnpj()) != null) {
+				setERRO("CNPJ JÁ CADASTRADO");
+				return false;
+			}
+		}
+		if (obj.getCpf() != null) {
+			if (!vl.isValidCpf(obj.getCpf())) {
+				setERRO("CPF INVÁLIDO");
+				return false;			
+			} else if (repositorio.validarCpfRepetido(obj.getCpf()) != null) {
+				setERRO("CPF JÁ CADASTRADO");
+				return false;
+			}
+		}
+		
 		return true;
 	}
 	

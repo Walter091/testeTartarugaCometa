@@ -15,10 +15,5 @@ public class IndexController {
 	public String index() {
 		return "index";
 	}		
-
-//	@GetMapping("/entrar")
-//	public String index() {
-//		return "index";
-//	}		
 	
 }

@@ -21,26 +21,10 @@ public class ServicoProduto {
 		repositorio.alterar(obj.getId(), obj.getNome(), obj.getPeso(), obj.getVolume(), obj.getValor());
 	}
 	
-	public void excluir(long id) {
-		repositorio.deleteById(id);
-	}
-
 	// -----------------------------------------------------------------------------
 	
-	public Integer obterId() {
-		return repositorio.obterId() == null ? 1 : repositorio.obterId()+1;
-	}
-
-	public Iterable<Produto> obterListaProduto(){
-		return repositorio.findAll();
-	}
-
 	public Optional<Produto> getProdutoPorId(Long id){
 		return repositorio.findById(id);
-	}
-
-	public Produto getProdutoPorIdNQ(Long id){
-		return repositorio.getByIdQN(id);
 	}
 	
 }

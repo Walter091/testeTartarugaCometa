@@ -24,18 +24,12 @@ public class DestinatarioController {
 	public String incluirDestinatario(@ModelAttribute("destinatario")Destinatario destinatario, Model model) {
 		return "/geral/dr/cadastroDestinatario";
 	}
-	
-	@GetMapping("/vizualizarDestinatario")
-	public String vizualizarDestinatario(Model model) {
-		model.addAttribute("listDestinatario", servico.obterListaDestinatarios());
-		return "geral/dr/vizualizarDestinatarios";
-	}
-	
+		
 	@PostMapping("/salvarDestinatario")
 	public String salvarDestinatario(@ModelAttribute("destinatario") Destinatario destinatario, Model model) {
 		if (status == StatusFormularioEnum.ALTERAR) {
 			if (servico.alterar(destinatario)) {
-				return "redirect:/vizualizarDestinatario";
+				return "redirect:/vizualizarLancamento";
 			} 
 		}
 
@@ -61,15 +55,4 @@ public class DestinatarioController {
 		return "/geral/dr/cadastroDestinatario";
 	}
 
-	@GetMapping("/indexDestinatario/excluir/{id}")
-	public String excluirDestinatario(@PathVariable("id") Long id, Model model) {
-		status = StatusFormularioEnum.EXCLUIR;
-		Destinatario obj = servico.getDestinatarioPorIdNQ(id);
-		if (obj == null) {
-			throw new IllegalArgumentException("Destinatario Inválido");
-		}
-		
-		servico.excluir(obj.getId());
-		return "redirect:/vizualizarDestinatario";
-	}
 }

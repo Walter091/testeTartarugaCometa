@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.example.tartarugaCometaGw.nucleo.StatusLancamentoEnum;
+
 @Entity
 @Table(name = "lancamento")
 public class Lancamento implements Serializable{
@@ -68,6 +70,10 @@ public class Lancamento implements Serializable{
 
 	public int getStatusLancamento() {
 		return statusLancamento;
+	}
+
+	public String getStatusLancamentoPorId() {
+		return StatusLancamentoEnum.obterPorID(statusLancamento);
 	}
 
 	public void setStatusLancamento(int statusLancamento) {
