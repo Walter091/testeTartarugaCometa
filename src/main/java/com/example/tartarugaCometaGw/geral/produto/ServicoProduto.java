@@ -18,7 +18,13 @@ public class ServicoProduto {
 	}
 		
 	public void alterar(Produto obj) {
-		repositorio.alterar(obj.getId(), obj.getNome(), obj.getPeso(), obj.getVolume(), obj.getValor());
+		Long id = repositorio.obterPelosCampos(obj.getNome(), obj.getValor());
+		Optional<Produto> pr = repositorio.findById(id);
+		pr.get().setNome(obj.getNome());
+		pr.get().setPeso(obj.getPeso());
+		pr.get().setVolume(obj.getVolume());
+		pr.get().setValor(obj.getValor());
+		repositorio.save(pr.get());
 	}
 	
 	// -----------------------------------------------------------------------------

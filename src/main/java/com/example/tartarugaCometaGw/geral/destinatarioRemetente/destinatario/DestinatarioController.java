@@ -30,17 +30,18 @@ public class DestinatarioController {
 		if (status == StatusFormularioEnum.ALTERAR) {
 			if (servico.alterar(destinatario)) {
 				return "redirect:/vizualizarLancamento";
-			} 
-		}
-
-		if (servico.salvarDestinatario(destinatario)) {
+			} else {
+				String msgErro = servico.getERRO();
+				model.addAttribute("msgError", msgErro);
+				return "/geral/dr/cadastroDestinatario";	
+			}
+		} else if (servico.salvarDestinatario(destinatario)) {
 			return "redirect:/incluirLancamento";
-		} 
-
-		String msgErro = servico.getERRO();
-		model.addAttribute("msgError", msgErro);
-		return "/geral/dr/cadastroDestinatario";	
-		
+		} else {
+			String msgErro = servico.getERRO();
+			model.addAttribute("msgError", msgErro);
+			return "/geral/dr/cadastroDestinatario";	
+		}
 	}
 	
 	@GetMapping("indexDestinatario/alterar/{id}")

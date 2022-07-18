@@ -26,19 +26,37 @@ public class ServicoLancamento {
 
 	@Autowired
 	private RepositorioDestinatario repositorioDestinatario;
+	
+	public String ERRO = " ";
 		
 	// -----------------------------------------------------------
 
-	public void salvar(Lancamento obj) {
-		repositorio.save(obj);
+	public boolean salvar(Lancamento obj) {
+		if (getLancamentoRepetido(obj) != null) {
+			setERRO("LANÇAMENTO JÁ CADASTRADO!!");
+			return false;
+		} else {
+			repositorio.save(obj);
+			return true;
+		}
 	}
 	
 	public void alterar(Lancamento obj) {
-		repositorio.alterar(obj.getId(), obj.getProduto(), obj.getRemetente(), obj.getDestinatario(), obj.getStatusLancamento());		
+		Long id = repositorio.obterPelosCampos(obj.getDestinatario(), obj.getRemetente());
+		Optional<Lancamento> ls = repositorio.findById(id);
+		ls.get().setProduto(obj.getProduto());
+		ls.get().setDestinatario(obj.getDestinatario());
+		ls.get().setRemetente(obj.getRemetente());
+		if (obj.getStatusLancamento() == 1) {
+			ls.get().setStatusLancamento(0); 
+		} else {
+			ls.get().setStatusLancamento(1);
+		}
+		repositorio.save(ls.get());
 	}
 
-	public void excluir(Lancamento obj) {
-		repositorio.delete(obj);
+	public void excluir(Optional<Lancamento> obj) {
+		repositorio.delete(obj.get());
 	}
 	
 	// -----------------------------------------------------------
@@ -51,8 +69,8 @@ public class ServicoLancamento {
 		return repositorio.findById(id);
 	}
 
-	public Lancamento getLancamentoPorIdNQ(Long id){
-		return repositorio.getByIdQN(id);
+	public Lancamento getLancamentoRepetido(Lancamento obj){
+		return repositorio.getLancamentoRepetido(obj.getRemetente(), obj.getDestinatario());
 	}
 
 	// -----------------------------------------------------------
@@ -80,5 +98,16 @@ public class ServicoLancamento {
 	public Iterable<Destinatario> getListDestinatarios() {
 		return repositorioDestinatario.findAll();
 	}
+
+	// ---------------------------------------------------------------
+	
+	public String getERRO() {
+		return ERRO;
+	}
+
+	public void setERRO(String erro) {
+		ERRO = erro;
+	}
+	
 
 }

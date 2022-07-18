@@ -31,7 +31,14 @@ public class ServicoRemetente {
 	public boolean alterar(Remetente obj) {
 		try {
 			if (doAntesDeAlterar(obj)) {
-				repositorio.alterar(obj.getId(), obj.getCnpj(), obj.getCpf(), obj.getRazaoSocial(), obj.getNome(), obj.getEndereco());
+				Long id = repositorio.obterPelosCampos(obj.getCnpj(), obj.getCpf());
+				Optional<Remetente> rs = repositorio.findById(id);
+				rs.get().setCnpj(obj.getCnpj());
+				rs.get().setCpf(obj.getCpf());
+				rs.get().setEndereco(obj.getEndereco());
+				rs.get().setRazaoSocial(obj.getRazaoSocial());
+				rs.get().setNome(obj.getNome());
+				repositorio.save(rs.get());
 				return true;
 			}
 			
@@ -48,37 +55,55 @@ public class ServicoRemetente {
 	// --------------------------------------------------------------
 	
 	public boolean doAntesDeAlterar(Remetente obj) {
-		if (repositorio.validarCnpjRepetido(obj.getCnpj()) != null) {
-			setERRO("CNPJ JÁ CADASTRADO");
-			return false;
-		} else if (repositorio.validarCpfRepetido(obj.getCpf()) != null) {
-			setERRO("CPF JÁ CADASTRADO");
-			return false;
-		}
-		return true;
-	}
-	
-	public boolean doAntesDeSalvar(Remetente obj) {
 		Validation vl = new Validation();
 		if (obj.getCnpj() != null) {
 			if((vl.isCNPJ(obj.getCnpj()))) {
 				setERRO("CNPJ INVÁLIDO");
 				return false;
-			} else if (repositorio.validarCnpjRepetido(obj.getCnpj()) != null) {
+			}
+		} else if (obj.getCpf() != null) {
+				if (!vl.isValidCpf(obj.getCpf())) {
+					setERRO("CPF INVÁLIDO");
+					return false;
+				}
+		}
+		return true;
+	}
+	
+	public boolean doAntesDeSalvar(Remetente obj) {
+		if (!validarCnpj(obj.getCnpj()) && validarCpf(obj.getCpf())) {
+			return false;
+		}
+		return true;
+	}
+		
+	// --------------------------------------------------------------
+	
+	public boolean validarCnpj(String cnpj) {
+		Validation vl = new Validation();
+		if (cnpj != null) {
+			if((vl.isCNPJ(cnpj))) {
+				setERRO("CNPJ INVÁLIDO");
+				return false;
+			} else if (repositorio.validarCnpjRepetido(cnpj) != null) {
 				setERRO("CNPJ JÁ CADASTRADO");
 				return false;
 			}
 		}
-		if (!obj.getCpf().isEmpty()) {
-			if (!vl.isValidCpf(obj.getCpf())) {
+		return true;
+	}
+	
+	public boolean validarCpf(String cpf) {
+		Validation vl = new Validation();
+		if (cpf != null) {
+			if (!vl.isValidCpf(cpf)) {
 				setERRO("CPF INVÁLIDO");
 				return false;			
-			} else if (repositorio.validarCpfRepetido(obj.getCpf()) != null) {
+			} else if (repositorio.validarCpfRepetido(cpf) != null) {
 				setERRO("CPF JÁ CADASTRADO");
 				return false;
 			}
 		}
-		
 		return true;
 	}
 	

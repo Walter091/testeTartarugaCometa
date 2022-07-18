@@ -30,15 +30,18 @@ public class RemetenteController {
 		if (status == StatusFormularioEnum.ALTERAR) {
 			if (servico.alterar(remetente)) {
 				return "redirect:/vizualizarLancamento";
-			} 
-		}
-		if (servico.salvarRemetente(remetente)) {
+			} else {
+				String msgErro = servico.getERRO();
+				model.addAttribute("msgError", msgErro);
+				return "/geral/dr/cadastroRemetente";	
+			}
+		} else if (servico.salvarRemetente(remetente)) {
 			return "redirect:/incluirProduto";
-		} 
-
-		String msgErro = servico.getERRO();
-		model.addAttribute("msgError", msgErro);
-		return "/geral/dr/cadastroRemetente";	
+		} else {
+			String msgErro = servico.getERRO();
+			model.addAttribute("msgError", msgErro);
+			return "/geral/dr/cadastroRemetente";	
+		}
 
 	}
 

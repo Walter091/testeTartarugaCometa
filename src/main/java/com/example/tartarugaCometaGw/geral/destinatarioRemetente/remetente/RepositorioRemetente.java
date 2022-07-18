@@ -1,8 +1,5 @@
 package com.example.tartarugaCometaGw.geral.destinatarioRemetente.remetente;
 
-import javax.transaction.Transactional;
-
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -12,18 +9,15 @@ import com.example.tartarugaCometaGw.geral.destinatarioRemetente.destinatario.De
 
 @Repository
 public interface RepositorioRemetente extends CrudRepository<Remetente, Long>{
-	
-	@Modifying
-	@Transactional
-	@Query(value = "UPDATE remetente SET CNPJ= :cnpj, CPF= :cpf, RAZAO_SOCIAL= :razaoSocial, NOME=:nome, ENDERECO= :endereco WHERE ID_REMETENTE= :id", nativeQuery = true)
-	public void alterar(@Param("id") Long id, @Param("cnpj") String cnpj, @Param("cpf") String cpf, @Param("razaoSocial") String razaoSocial, @Param("nome") String nome, @Param("endereco") String endereco);
-
-	// -----------------------------------------------------------------------------------------------
-	
+		
 	@Query(value = "SELECT * FROM remetente where CNPJ=:cnpj", nativeQuery = true)
 	public Remetente validarCnpjRepetido(@Param("cnpj") String cnpj);
 
 	@Query(value = "SELECT * FROM remetente where CPF=:cpf", nativeQuery = true)
 	public Destinatario validarCpfRepetido(@Param("cpf") String cpf);
+
+	@Query(value = "SELECT id_remetente FROM remetente "
+			+ "where CNPJ=:cnpj or CPF=:cpf", nativeQuery = true)
+	public Long obterPelosCampos(@Param("cnpj") String cnpj, @Param("cpf") String cpf);
 		
 }

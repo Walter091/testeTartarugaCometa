@@ -48,9 +48,10 @@
 			<button type="submit" class="btn btn-info col-2">Salvar</button>
 
 		</form>
-		<hr>
+		<div id="divMsgError" th:each="m : ${msgError}">
+			<span th:text="${m}"></span>
+		</div>
 		<a th:href="@{/vizualizarLancamento}">Voltar</a>
-
 	</div>
 </body>
 

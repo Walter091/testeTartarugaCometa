@@ -36,7 +36,7 @@ public class Remetente implements Serializable{
 	
 	@Column(name = "ENDERECO")
 	private String endereco;
-	
+
 	// ----------------------------------------------------
 
 	public Long getId() {
@@ -96,7 +96,7 @@ public class Remetente implements Serializable{
 	}
 
 	public String toString() {
-		return id + " | " + cnpj + " | " + razaoSocial +  " | " 
+		return id + " | " + cnpj + " | " + cpf + " | " + razaoSocial +  " | " 
 				+  nome + " | " + endereco;
 		
 	}

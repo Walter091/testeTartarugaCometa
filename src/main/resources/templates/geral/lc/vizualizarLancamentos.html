@@ -26,14 +26,15 @@
 					<th>Remetente</th>
 					<th>Produto</th>
 					<th>Destinatario</th>
-					<th></th>
+					<th>Alterar Status Lançamento</th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="lancamento : ${listLancamentos}">
 					<td th:text="${lancamento.id}"></td>
-					<td th:text="${lancamento.statusLancamentoPorId}"></td>
+					<td th:text="${lancamento.statusLancamentoPorId}">
+					</td>
 					<td>
 						<a th:href="@{/indexRemetente/alterar/{id}(id=${lancamento.remetente})}" class="btn btn-primary">Vizualizar/Alterar</a>
 					</td>
@@ -44,7 +45,7 @@
 						<a th:href="@{/indexDestinatario/alterar/{id}(id=${lancamento.destinatario})}" class="btn btn-primary">Vizualizar/Alterar</a>
 					</td>
 					<td>
-						<a th:href="@{/indexLancamento/alterar/{id}(id=${lancamento.id})}" class="btn btn-primary">Alterar</a>
+						<a th:href="@{/indexLancamento/alterar/{id}(id=${lancamento.id})}" class="btn btn-primary">Alterar Status</a>
 					</td>
 					<td>
 						<a th:href="@{/indexLancamento/excluir/{id}(id=${lancamento.id})}" class="btn btn-danger">Excluir</a>

@@ -7,6 +7,39 @@
 		
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+	 <script type="text/javascript">
+		  function desabilitarCnpj(selecionado) {
+			if (selecionado) {
+				obrigarCpf()
+			    document.getElementById('nome').disabled = false;
+			    document.getElementById('cpf').disabled = false;
+			    document.getElementById('cnpj').disabled = selecionado;
+			    document.getElementById('razaoSocial').disabled = selecionado;
+		  	}			
+		  }
+
+		  function desabilitarCpf(selecionado) {
+			if (selecionado) {
+				obrigarCnpj();
+			    document.getElementById('nome').disabled = selecionado;
+			    document.getElementById('cpf').disabled = selecionado;
+			    document.getElementById('cnpj').disabled = false;
+			    document.getElementById('razaoSocial').disabled = false;
+		  	}			
+		  }
+  		  function obrigarCnpj() {
+			    document.getElementById('cnpj').required = true;
+			    document.getElementById('razaoSocial').required = true;
+		  }	
+
+  		  function obrigarCpf() {
+			    document.getElementById('cpf').required = true;
+			    document.getElementById('nome').required = true;
+		  }	
+
+    </script>
+
 </head>
 
 <body>
@@ -14,18 +47,24 @@
 		<h1>Tartaruga Cometa | Destinatário</h1>
 		<hr>
 		<form action="#" th:action="@{/salvarDestinatario}" th:object="${destinatario}" method="POST">
+	
+			<input id="dslbCpf" type="radio" onclick="desabilitarCpf(this.checked)"  required="true" name="dsbl"> Pessoa Jurídica</label>
+			<input id="dslbCnpj" type="radio" onclick="desabilitarCnpj(this.checked)"  required="true" name="dsbl"> Pessoa Física</label>
+
+			<br>
+			<br>
 
 			<label for="cnpj" >CNPJ:</label>
-			<input type="text" id="cnpj" th:field="*{cnpj}" placeholder="CNPJ (CASO PESSOA JURÍDICA)" class="form-control mb-4 col-4">
+			<input type="text" id="cnpj" th:field="*{cnpj}" disabled="true" placeholder="CNPJ (CASO PESSOA JURÍDICA)" class="form-control mb-4 col-4">
 
 			<label for="razaoSocial" >Razão Social:</label>
-			<input type="text" id="razaoSocial" th:field="*{razaoSocial}" placeholder="Razão Social" class="form-control mb-4 col-4">			
+			<input type="text" id="razaoSocial" th:field="*{razaoSocial}" disabled="true" placeholder="Razão Social" class="form-control mb-4 col-4">			
 
 			<label for="nome" >Nome Destinatário (Caso Pessoa física):</label>
-			<input type="text" id="nome" th:field="*{nome}" placeholder="Nome" class="form-control mb-4 col-4">
+			<input type="text" id="nome" th:field="*{nome}" disabled="true" placeholder="Nome" class="form-control mb-4 col-4">
 
 			<label for="cpf" >CPF (Caso Pessoa física):</label>
-			<input type="text" id="cpf" th:field="*{cpf}" placeholder="CPF (CASO PESSOA FÍSICA)" class="form-control mb-4 col-4">
+			<input type="text" id="cpf" th:field="*{cpf}" disabled="true" placeholder="CPF (CASO PESSOA FÍSICA)" class="form-control mb-4 col-4">
 			
 			<label for="endereco" >Descreva seu Endereço:</label>
 			<input type="text" id="endereco" th:field="*{endereco}" required="true" placeholder="Nome Da rua/Bairro/Municipio/UF" class="form-control mb-4 col-4">

@@ -1,5 +1,7 @@
 package com.example.tartarugaCometaGw.geral.lancamentos;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ public class LancamentoController {
 	@Autowired
 	private ServicoLancamento servico;
 	
+	@SuppressWarnings("unused")
 	private StatusFormularioEnum status;
 	
 	// -------------------------------------------------------------------
@@ -43,38 +46,43 @@ public class LancamentoController {
 
 		Iterable<Destinatario> lsDestinatario = servico.getListDestinatarios();
 		model.addAttribute("listDestinatarios", lsDestinatario == null ? " " : lsDestinatario);
-		
+
+		String msgErro = servico.getERRO();
+		model.addAttribute("msgError", msgErro);
+	
 		return "geral/lc/cadastroLancamento";
 	}
 	
 	@PostMapping("/salvarLancamento")
-	public String salvarlancamento(@ModelAttribute("lancamento") Lancamento lancamento) {
-		if(status == StatusFormularioEnum.ALTERAR) {
-			servico.alterar(lancamento);
-		} else {
-			servico.salvar(lancamento);
-		}
+	public String salvarlancamento(@ModelAttribute("lancamento") Lancamento lancamento, Model model) {
+		if (!servico.salvar(lancamento)) {
+			String msgErro = servico.getERRO();
+			model.addAttribute("msgError", msgErro);
+			
+			return "redirect:/incluirLancamento";
+		} 
+		
 		return "redirect:/vizualizarLancamento";
 	}
 	
 	@GetMapping("/indexLancamento/alterar/{id}")
 	public String alterarLancamento(@PathVariable("id") Long id, Model model) {
 		status = StatusFormularioEnum.ALTERAR;
-		Lancamento lancOptional = servico.getLancamentoPorIdNQ(id);
-		if (lancOptional == null) {
+		Optional<Lancamento> lancOptional = servico.getLancamentoPorId(id);
+		if (lancOptional.isEmpty()) {
 			throw new IllegalArgumentException("Lançamento Inválido");
 		}
-	
+		servico.alterar(lancOptional.get());
 		model.addAttribute("lancamento", lancOptional);
-		return "geral/lc/alterarLancamento";
+		return "redirect:/vizualizarLancamento";
 
 	}
 
 	@GetMapping("/indexLancamento/excluir/{id}")
 	public String excluirLancamento(@PathVariable("id") Long id, Model model) {
 		status = StatusFormularioEnum.EXCLUIR;
-		Lancamento obj = servico.getLancamentoPorIdNQ(id);
-		if (obj == null) {
+		Optional<Lancamento> obj = servico.getLancamentoPorId(id);
+		if (obj.isEmpty()) {
 			throw new IllegalArgumentException("Lançamento Inválido");
 		}
 		
